@@ -1,7 +1,7 @@
 class Negociacao {
 
     constructor(data, quantidade, valor) {
-        this._data = new Date(data.getTime());
+        this._data = new Date(data.getTime()); //new Date() para nao correr o risco de alguem alterar o valor do objeto que está como referencia e alterar a classe
         this._quantidade = quantidade;
         this._valor = valor;
 
