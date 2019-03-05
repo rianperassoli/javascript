@@ -6,25 +6,34 @@ class NegociacaoController {
         this._inputData = $('#data');
         this._inputQuantidade = $('#quantidade');
         this._inputValor = $('#valor');
+        this._listaNegociacoes = new ListaNegociacoes();
     }
 
     adiciona(event) {
 
         event.preventDefault();
 
-        //console.log(typeof(this._inputData.value))
+        this._listaNegociacoes.add(this._criaNegociacao());
 
-        let data = new Date(
-            ...this._inputData.value
-                .split('-').map((item, indice) => item - indice % 2)
-                //poderia ser .map(function(item, indice) {return item - indice % 2})
-        );
+        this._limpaForm();
 
-        let negociacao = new Negociacao(
-            data,
+        console.log(this._listaNegociacoes.negociacoes);
+    }
+
+    _criaNegociacao() {
+
+        return new Negociacao(
+            DateHelper.textToDate(this._inputData.value),
             this._inputQuantidade.value,
-            this._inputValor.value
-        );
+            this._inputValor.value);
+    }
+
+    _limpaForm() {
+        this._inputData.value = '';
+        this._inputQuantidade.value = 1;
+        this._inputValor.value = '0.0';
+
+        this._inputData.focus();
     }
 
 }
