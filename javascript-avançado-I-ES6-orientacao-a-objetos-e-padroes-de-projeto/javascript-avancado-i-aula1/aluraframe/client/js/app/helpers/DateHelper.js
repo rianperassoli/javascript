@@ -11,7 +11,9 @@ class DateHelper {
 
     static textToDate(text) {
 
-        if (!/\d{4}-\d{2}-\d{2}/.test(text))
+        let expressaoDataValida = /^\d{4}-\d{2}-\d{2}$/
+
+        if (!expressaoDataValida.test(text))
             throw new Error('Invalid date format. The parameter must be yyyy-mm-dd')
 
         return new Date(...text.split('-').map((item, indice) => item - indice % 2));
